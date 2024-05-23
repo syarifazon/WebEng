@@ -1,3 +1,27 @@
+<?php
+require_once('connection.php');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $con->real_escape_string($_POST['name']);
+    $email = $con->real_escape_string($_POST['email']);
+    $phone = $con->real_escape_string($_POST['phone']);
+    $gender = $con->real_escape_string($_POST['gender']);
+    $username = $con->real_escape_string($_POST['username']);
+    $password = $con->real_escape_string($_POST['password']);
+
+    $sql = "INSERT INTO user_registrations (name, email, phone, gender, username, password) 
+            VALUES ('$name', '$email', '$phone', '$gender', '$username', '$password')";
+    
+    if ($con->query($sql) === TRUE) {
+        echo "Registration submitted successfully. Waiting for admin approval.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $con->error;
+    }
+}
+
+$con->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,38 +71,6 @@
 </body>
 </html>
 
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $db_host = "localhost";
-    $db_username = "root";
-    $db_password = "";
-    $db_name = "fkpark";
-
-    $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Escape and retrieve form data
-    $userFullname = $conn->real_escape_string($_POST['name']);
-    $userCategory = "student"; // Assuming all users registering through this form are students
-    $userGender = $conn->real_escape_string($_POST['gender']);
-    $username = $conn->real_escape_string($_POST['username']);
-    $password = $conn->real_escape_string($_POST['password']); // Assuming password is directly entered by the user
-    $userContact = $conn->real_escape_string($_POST['phone']);
-
-    // Insert user registration data into the database
-    $sql = "INSERT INTO user_registrations (name, email, phone, gender, username, password) 
-            VALUES ('$userFullname', '', '$userContact', '$userGender', '$username', '$password')";
-    if ($conn->query($sql) === TRUE) {
-        $message = "User registration request submitted successfully. Waiting for admin approval.";
-    } else {
-        $message = "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    $conn->close();
-}
-?>
 
 
 

@@ -1,49 +1,38 @@
 <?php
 session_start();
+require_once('connection.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $db_host = "localhost";
-    $db_username = "root";
-    $db_password = "";
-    $db_name = "fkpark";
+    if (empty($_POST['username']) || empty($_POST['password'])) {
+        $error = "Please fill in all fields";
+    } else {
+        $username = $con->real_escape_string($_POST['username']);
+        $password = $con->real_escape_string($_POST['password']);
+        $role = $con->real_escape_string($_POST['role']);
 
-    $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+        $sql = "SELECT * FROM users WHERE Username = '$username' AND UserCategory = '$role' AND UserPassword = '$password'";
+        $result = $con->query($sql);
 
-    $username = $conn->real_escape_string($_POST['username']);
-    $password = $_POST['password'];
-    $role = $conn->real_escape_string($_POST['role']);
-
-    $sql = "SELECT * FROM users WHERE Username = '$username' AND UserCategory = '$role'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        if (password_verify($password, $row['UserPassword'])) {
-            // Password and role match, proceed with login
+        if ($result->num_rows > 0) {
             $_SESSION['username'] = $username;
             $_SESSION['role'] = $role;
 
-            // Redirect based on user role
             if ($role === 'Administrator') {
                 header("Location: admin_dashboard.php");
-            } else {
-                // Redirect to a default page for other user roles
-                header("Location: default_dashboard.php");
+            } elseif ($role === 'Student') {
+                header("Location: student_dashboard.php");
+            } elseif ($role === 'Keselamatan Staff') {
+                header("Location: staff_dashboard.php");
             }
             exit();
         } else {
-            $error = "Invalid password";
+            $error = "Invalid username, role, or password";
         }
-    } else {
-        $error = "No user found with the given username and role";
     }
-
-    $conn->close();
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
