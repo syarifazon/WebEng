@@ -55,13 +55,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <header>
         <h1>FKPark</h1>
-        <nav>
+        <nav class=navigation>
             <a href="user_register.php">Register</a>
+            <a>&#10072;</a>
             <a href="login.php">Login</a>
         </nav>
     </header>
     <div class="container">
-        <h2>Login</h2>
+    <h2>Login</h2>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br>
@@ -80,9 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
         <?php if(isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
     </div>
-    <footer>
+    <div class="footer">
         <p>&copy; 2024 FKPark</p>
-    </footer>
+    </div>
 </body>
 </html>
-

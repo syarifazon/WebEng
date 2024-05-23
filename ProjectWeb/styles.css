@@ -1,23 +1,30 @@
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; 
+    min-height: 100vh; /* Ensure the page takes at least the height of the viewport */
     margin: 0;
     padding: 0;
 }
 
 .footer {
-    margin-top: auto; 
-    background-color: #f1f1f1;
-    padding: 20px;
+    margin-top: auto; /* Push the footer to the bottom */
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #333;
+    padding: 10px;
+    width: 100%; /* Ensure the footer spans the entire width */
+    display: block;
     text-align: center;
-    width: 100%; 
+    color: white;
+    z-index: 9999;
 }
 
 header {
-    background-color: #f1f1f1;
+    background-color: #1CD8C8;
     padding: 20px;
     text-align: center;
+    z-index: 9999;
+    font-family: "Trebuchet MS", sans-serif ;
 }
 
 header {
@@ -66,6 +73,9 @@ form input[type="submit"]:hover {
 }
 
 .container {
+    background-image: url("fkpark_login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -74,12 +84,19 @@ form input[type="submit"]:hover {
     padding: 20px;
 }
 
+.container h2{
+    background-color: #fff;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 .container form {
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 10px;
     background-color: #fff;
-    width: 300px;
+    width: 300px; /* Adjust as needed */
 }
 
 .container form label {
@@ -89,12 +106,12 @@ form input[type="submit"]:hover {
 
 .container form input,
 .container form select {
-    width: calc(100% - 20px);
+    width: calc(100% - 20px); /* Adjusted width */
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; 
+    box-sizing: border-box; /* Ensure padding and border are included in width */
 }
 
 .container form input[type="submit"] {
@@ -115,31 +132,135 @@ form input[type="submit"]:hover {
     text-align: center;
 }
 
+/* Sidebar styles */
 .sidebar {
     height: 100%;
     width: 200px;
     position: fixed;
-    top: 75px; 
+    z-index: 1;
+    top: 0; /* Adjust the value to lower the sidebar */
     left: 0;
-    background-color: #111;
-    padding-top: 20px;
+    background-color: #4E4E4E;
+    overflow-x: hidden;
+    padding-top: 69px;
+    bottom: 0;
+    overflow: auto;
 }
-
 
 .sidebar a {
     padding: 10px 15px;
     text-decoration: none;
     font-size: 18px;
-    color: #818181;
+    color: #f1f1f1;
     display: block;
 }
 
 .sidebar a:hover {
-    color: #f1f1f1;
+    color: #37C8BB;
 }
 
 .content {
-    margin-left: 210px; 
-    padding: 20px;
+    margin-top: 10px;
+    margin-left: 210px; /* Adjust this value based on sidebar width */
+}
+
+.stat_table {
+    margin-top: 10px;
+    margin-left: 210px; /* Adjust this value based on sidebar width */
+    /*padding: 20px;*/
+}
+
+.stat_table table{
+    width: 700px;
+    border: 1px solid;
+    border-collapse: collapse;
+    border-radius: 20px;
+}
+
+.stat_table tr,td{
+    border: 1px solid;
+    border-collapse: collapse;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid black;
+    background-color: #DAD9D9;
+}
+
+.stat_table th{
+    background-color: #37C8BB;
+    color: black;
+    height: 40px;
+    border: 1px solid;
+    border-collapse: collapse;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+.stat_table {
+    margin-top: 10px;
+    margin-left: 210px; /* Adjust this value based on sidebar width */
+    /*padding: 20px;*/
+}
+
+.event_table {
+    margin-top: 10px;
+    margin-left: 210px; /* Adjust this value based on sidebar width */
+}
+
+.event_table table{
+    width: 700px;
+    border: 1px solid;
+    border-collapse: collapse;
+    border-radius: 20px;
+}
+
+.event_table td{
+    border: 1px solid;
+    border-collapse: collapse;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid black;
+    background-color: #DAD9D9;
+}
+
+.event_table tr:nth-child(even) {
+    background-color: #fff;
+}
+
+.event_table tr:nth-child(odd) {
+    background-color: #007BFF;
+}
+
+.event_table th{
+    background-color: #73BEF0;
+    color: black;
+    height: 40px;
+    border: 1px solid;
+    border-collapse: collapse;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+.dashboard{
+    background-image: url("dashboard_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the page takes at least the height of the viewport */
+    margin: 0;
+    padding: 0;
+}
+
+.navigation{
+    font-family: "Trebuchet MS", sans-serif ;
+    font-weight: bold;
+    font-size: 20px
+}
+
+.navigation a:hover{
+    color: #f1f1f1;
 }
 

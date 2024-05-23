@@ -41,9 +41,9 @@
             <input type="submit" value="Register">
         </form>
     </div>
-    <footer>
+    <div class="footer">
         <p>&copy; 2024 FKPark</p>
-    </footer>
+    </div>
 </body>
 </html>
 
@@ -61,10 +61,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Escape and retrieve form data
     $userFullname = $conn->real_escape_string($_POST['name']);
-    $userCategory = "student"; 
+    $userCategory = "student"; // Assuming all users registering through this form are students
     $userGender = $conn->real_escape_string($_POST['gender']);
     $username = $conn->real_escape_string($_POST['username']);
-    $password = $conn->real_escape_string($_POST['password']); 
+    $password = $conn->real_escape_string($_POST['password']); // Assuming password is directly entered by the user
     $userContact = $conn->real_escape_string($_POST['phone']);
 
     // Insert user registration data into the database

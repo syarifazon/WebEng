@@ -11,11 +11,17 @@
         <h1>FKPark Admin </h1>
     </header>
     <div class="sidebar">
+        <hr>
         <a href="admin_dashboard.php">Dashboard</a>
+        <hr>
         <a href="admin_register.php">Register User</a>
+        <hr>
         <a href="#">Manage User</a>
+        <hr>
         <a href="#">Manage Vehicle</a>
+        <hr>
         <a href="logout.php">Logout</a>
+        <hr>
     </div>
     <div class="content">
         <h2>Pending User Registrations</h2>
@@ -58,6 +64,7 @@
             echo "<p>No pending registrations.</p>";
         }
 
+        // Process form submission
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $registration_id = $_POST['registration_id'];
 
@@ -97,9 +104,9 @@
         $conn->close();
         ?>
     </div>
-    <footer>
+    <div class="footer">
         <p>&copy; 2024 FKPark</p>
-    </footer>
+    </div>
 </body>
 </html>
 
