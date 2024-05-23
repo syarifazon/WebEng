@@ -1,24 +1,33 @@
 <?php
 require_once('connection.php');
 
-// Check if the admin user already exists
-$sql = "SELECT * FROM users WHERE Username = 'admin'";
-$result = $con->query($sql);
+// Function to insert a user if not exists
+function insertUser($fullname, $category, $gender, $username, $password, $contact, $con) {
+    // Check if the user already exists
+    $sql = "SELECT * FROM users WHERE Username = '$username'";
+    $result = $con->query($sql);
 
-if ($result->num_rows == 0) {
-    // Insert initial admin user
-    $adminPassword = "admin_password"; // Change "admin_password" to your desired password
-    $sql = "INSERT INTO users (UserFullname, UserCategory, UserGender, Username, UserPassword, UserContact) 
-            VALUES ('Admin', 'Administrator', 'Other', 'admin', '$adminPassword', '0000000000')";
-    
-    if ($con->query($sql) === TRUE) {
-        echo "Admin user created successfully\n";
+    if ($result->num_rows == 0) {
+        // Insert the user
+        $sql = "INSERT INTO users (UserFullname, UserCategory, UserGender, Username, UserPassword, UserContact) 
+                VALUES ('$fullname', '$category', '$gender', '$username', '$password', '$contact')";
+        
+        if ($con->query($sql) === TRUE) {
+            echo "$fullname ($category) created successfully\n";
+        } else {
+            echo "Error creating $fullname: " . $con->error . "\n";
+        }
     } else {
-        echo "Error creating admin user: " . $con->error;
+        echo "$fullname ($category) already exists\n";
     }
-} else {
-    echo "Admin user already exists\n";
 }
+
+// Insert admin user
+insertUser('Muhamad Syarifudin', 'Administrator', 'Male', 'admin', 'admin_123', '0197552553', $con);
+
+// Insert Keselamatan Staff user
+insertUser('Haikal', 'Keselamatan Staff', 'Male', 'staff', 'staff_password', '0189068595', $con);
 
 $con->close();
 ?>
+
