@@ -1,17 +1,17 @@
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure the page takes at least the height of the viewport */
+    min-height: 100vh; 
     margin: 0;
     padding: 0;
 }
 
 .footer {
-    margin-top: auto; /* Push the footer to the bottom */
+    margin-top: auto; 
     background-color: #f1f1f1;
     padding: 20px;
     text-align: center;
-    width: 100%; /* Ensure the footer spans the entire width */
+    width: 100%; 
 }
 
 header {
@@ -79,7 +79,7 @@ form input[type="submit"]:hover {
     padding: 20px;
     border-radius: 10px;
     background-color: #fff;
-    width: 300px; /* Adjust as needed */
+    width: 300px;
 }
 
 .container form label {
@@ -89,12 +89,12 @@ form input[type="submit"]:hover {
 
 .container form input,
 .container form select {
-    width: calc(100% - 20px); /* Adjusted width */
+    width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; /* Ensure padding and border are included in width */
+    box-sizing: border-box; 
 }
 
 .container form input[type="submit"] {
@@ -115,12 +115,11 @@ form input[type="submit"]:hover {
     text-align: center;
 }
 
-/* Sidebar styles */
 .sidebar {
     height: 100%;
     width: 200px;
     position: fixed;
-    top: 75px; /* Adjust the value to lower the sidebar */
+    top: 75px; 
     left: 0;
     background-color: #111;
     padding-top: 20px;
@@ -140,7 +139,7 @@ form input[type="submit"]:hover {
 }
 
 .content {
-    margin-left: 210px; /* Adjust this value based on sidebar width */
+    margin-left: 210px; 
     padding: 20px;
 }
 

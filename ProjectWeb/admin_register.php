@@ -58,7 +58,6 @@
             echo "<p>No pending registrations.</p>";
         }
 
-        // Process form submission
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $registration_id = $_POST['registration_id'];
 

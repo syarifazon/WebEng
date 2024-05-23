@@ -61,10 +61,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Escape and retrieve form data
     $userFullname = $conn->real_escape_string($_POST['name']);
-    $userCategory = "student"; // Assuming all users registering through this form are students
+    $userCategory = "student"; 
     $userGender = $conn->real_escape_string($_POST['gender']);
     $username = $conn->real_escape_string($_POST['username']);
-    $password = $conn->real_escape_string($_POST['password']); // Assuming password is directly entered by the user
+    $password = $conn->real_escape_string($_POST['password']); 
     $userContact = $conn->real_escape_string($_POST['phone']);
 
     // Insert user registration data into the database
