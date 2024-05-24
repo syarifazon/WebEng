@@ -155,7 +155,7 @@
                 echo "<td>" . $row["username"] . "</td>";
                 echo "<td>
                         <form method='post' action='admin_register.php'>
-                            <input type='hidden' name='registration_id' value='" . $row["id"] . "'>
+                            <input type='hidden' name='registration_id' value='" . $row["ID"] . "'>
                             <input type='submit' name='approve' value='Approve'>
                             <input type='submit' name='reject' value='Reject'>
                         </form>
