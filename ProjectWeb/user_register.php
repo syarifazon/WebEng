@@ -13,8 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             VALUES ('$name', '$email', '$phone', '$gender', '$username', '$password')";
     
     if ($con->query($sql) === TRUE) {
-        echo "Registration submitted successfully. Waiting for admin approval.";
-    } else {
+        echo "<script type='text/javascript'>alert('Registration submitted successfully. Waiting for admin approval.');</script>";
+    } 
+    else {
         echo "Error: " . $sql . "<br>" . $con->error;
     }
 }
@@ -33,8 +34,9 @@ $con->close();
 <body>
     <header>
         <h1>FKPark</h1>
-        <nav>
+        <nav class=navigation>
             <a href="user_register.php">Register</a>
+            <a>&#10072;</a>
             <a href="login.php">Login</a>
         </nav>
     </header>
