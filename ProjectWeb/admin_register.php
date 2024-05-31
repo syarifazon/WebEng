@@ -57,7 +57,7 @@ $result = $con->query($sql);
         <nav>
             <a href="admin_dashboard.php">Dashboard</a>
             <a href="admin_register.php">Register User</a>
-            <a href="manage_user.php">Manage User</a>
+            <a href="admin_manage_user.php">Manage User</a>
             <a href="manage_vehicle.php">Manage Vehicle</a>
             <a href="logout.php">Logout</a>
         </nav>
