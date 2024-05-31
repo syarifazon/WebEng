@@ -77,7 +77,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
             <div class="nav-links">
                 <a href="admin_dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 <a href="admin_register.php"><i class="fas fa-user-plus"></i> Register User</a>
-                <a href="manage_user.php"><i class="fas fa-users-cog"></i> Manage User</a>
+                <a href="admin_manage_user.php"><i class="fas fa-users-cog"></i> Manage User</a>
                 <a href="manage_vehicle.php"><i class="fas fa-car"></i> Manage Vehicle</a>
                 <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>

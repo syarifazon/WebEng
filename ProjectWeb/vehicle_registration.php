@@ -70,7 +70,6 @@
             <select id="vehicleType" name="vehicleType" required>
                 <option value="Car">Car</option>
                 <option value="Motorcycle">Motorcycle</option>
-                <option value="Truck">Truck</option>
             </select>
 
             <label for="vehicleColor">Vehicle Color:</label>
