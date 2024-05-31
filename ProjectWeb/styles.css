@@ -409,3 +409,23 @@ h2 {
 .vehicleReg-form input[type="submit"]:hover {
     background-color: #0056b3;
 }
+
+.search-form  {
+    width: 50%;
+    margin-right: 20px;
+    flex: auto;
+}
+
+.all-users-container {
+    width: 50%;
+    margin-left: 20px; 
+    flex: auto;
+}
+
+@media (max-width: 768px) {
+    .search-form, .all-users-container {
+        width: 100%; /* On smaller screens, each container takes 100% width */
+        margin-right: 0; /* Remove margin to stack containers vertically */
+        margin-bottom: 20px; /* Add some space between the stacked containers */
+    }
+}

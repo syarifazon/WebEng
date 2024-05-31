@@ -25,14 +25,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Check if user is found
         if ($result->num_rows > 0) {
-            // Fetch and display user information
-            $row = $result->fetch_assoc();
+            // Display user information and delete button
             $user_info .= "<h2>User Information</h2>";
-            $user_info .= "<p>User ID: " . $row['UserID'] . "</p>";
-            $user_info .= "<p>Username: " . $row['Username'] . "</p>";
-            $user_info .= "<p>Full Name: " . $row['UserFullname'] . "</p>";
-            $user_info .= "<p>Contact: " . $row['UserContact'] . "</p>";
-            // Add more user information fields as needed
+            while ($row = $result->fetch_assoc()) {
+                $user_info .= "<div>";
+                $user_info .= "<p>User ID: " . $row['UserID'] . "</p>";
+                $user_info .= "<p>Username: " . $row['Username'] . "</p>";
+                $user_info .= "<p>Full Name: " . $row['UserFullname'] . "</p>";
+                $user_info .= "<p>Contact: " . $row['UserContact'] . "</p>";
+                // Add more user information fields as needed
+                $user_info .= "<form action='admin_manage_user.php' method='post'>";
+                $user_info .= "<input type='hidden' name='delete_user_id' value='" . $row['UserID'] . "'>";
+                $user_info .= "<input type='submit' name='delete_user' value='Delete'>";
+                $user_info .= "</form>";
+                $user_info .= "</div>";
+            }
         } else {
             $user_info = "<p>No user found with the provided criteria.</p>";
         }
@@ -40,6 +47,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user_info = "<p>Please provide user ID or username to search.</p>";
     }
 }
+
+// Handle delete request
+if (isset($_POST['delete_user'])) {
+    $delete_user_id = $_POST['delete_user_id'];
+    // Perform deletion from the database
+    $sql_delete = "DELETE FROM users WHERE UserID = ?";
+    $stmt_delete = $con->prepare($sql_delete);
+    $stmt_delete->bind_param("i", $delete_user_id);
+    $stmt_delete->execute();
+    if ($stmt_delete->affected_rows > 0) {
+        $user_info .= "<p>User with ID: $delete_user_id has been deleted.</p>";
+    } else {
+        $user_info .= "<p>Error deleting user.</p>";
+    }
+}
+
+$sql_all_users = "SELECT UserID, Username FROM users";
+$result_all_users = $con->query($sql_all_users);
+$all_users_info = "";
+
+// Check if there are users
+if ($result_all_users->num_rows > 0) {
+    // Display all user IDs with their usernames
+    $all_users_info .= "<h2>All Users</h2>";
+    while ($row = $result_all_users->fetch_assoc()) {
+        $all_users_info .= "<p>User ID: " . $row['UserID'] . ", Username: " . $row['Username'] . "</p>";
+    }
+} else {
+    $all_users_info = "<p>No users found.</p>";
+}
+
+$con->close();
 ?>
 
 <!DOCTYPE html>
@@ -106,18 +145,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <header>
-        <div class="navbar">
-            <h1>Manage User - FKPark</h1>
-            <div class="nav-links">
-                <a href="admin_dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                <a href="admin_register.php"><i class="fas fa-user-plus"></i> Register User</a>
-                <a href="admin_manage_user.php"><i class="fas fa-users-cog"></i> Manage User</a>
-                <a href="manage_vehicle.php"><i class="fas fa-car"></i> Manage Vehicle</a>
-                <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
-            </div>
+    <div class="navbar">
+        <h1>Manage User - FKPark</h1>
+        <div class="nav-links">
+            <a href="admin_dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="admin_register.php"><i class="fas fa-user-plus"></i> Register User</a>
+            <a href="admin_manage_user.php"><i class="fas fa-users-cog"></i> Manage User</a>
+            <a href="manage_vehicle.php"><i class="fas fa-car"></i> Manage Vehicle</a>
+            <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
+    </div>
     </header>
     <div class="content-userprofile">
+        <!-- Search form -->
         <div class="search-form">
             <h2>Search User</h2>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -128,10 +168,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="submit" value="Search">
             </form>
         </div>
+        <!-- User information and delete button -->
+        <div class="all-users-container">
+            <?php echo $all_users_info; ?>
+        </div>
         <?php echo $user_info; ?>
     </div>
-    <div class="footer">
-        <p>&copy; 2024 FKPark</p>
-    </div>
+    <!-- Footer section -->
 </body>
 </html>
