@@ -140,6 +140,7 @@ createTable($conn, 'TrafficSummon', "CREATE TABLE TrafficSummon (
     FOREIGN KEY (KeselamatanID) REFERENCES users(UserID) ON DELETE CASCADE ON UPDATE CASCADE
 )");
 
+
 $conn->close();
 ?>
 

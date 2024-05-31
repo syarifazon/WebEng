@@ -8,19 +8,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gender = $con->real_escape_string($_POST['gender']);
     $username = $con->real_escape_string($_POST['username']);
     $password = $con->real_escape_string($_POST['password']);
+    $status = 'pending'; // Registration status is pending by default
 
-    $sql = "INSERT INTO user_registrations (name, email, phone, gender, username, password) 
-            VALUES ('$name', '$email', '$phone', '$gender', '$username', '$password')";
+    $sql = "INSERT INTO user_registrations (name, email, phone, gender, username, password, status) 
+            VALUES ('$name', '$email', '$phone', '$gender', '$username', '$password', '$status')";
     
     if ($con->query($sql) === TRUE) {
         echo "<script type='text/javascript'>alert('Registration submitted successfully. Waiting for admin approval.');</script>";
-    } 
-    else {
+    } else {
         echo "Error: " . $sql . "<br>" . $con->error;
     }
-}
 
-$con->close();
+    $con->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ $con->close();
 <body>
     <header>
         <h1>FKPark</h1>
-        <nav class=navigation>
+        <nav class="navigation">
             <a href="user_register.php">Register</a>
             <a>&#10072;</a>
             <a href="login.php">Login</a>
@@ -72,6 +72,7 @@ $con->close();
     </div>
 </body>
 </html>
+
 
 
 

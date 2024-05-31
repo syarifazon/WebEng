@@ -3,34 +3,60 @@ session_start();
 require_once('connection.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST['username']) || empty($_POST['password'])) {
+    if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['role'])) {
         $error = "Please fill in all fields";
     } else {
         $username = $con->real_escape_string($_POST['username']);
         $password = $con->real_escape_string($_POST['password']);
         $role = $con->real_escape_string($_POST['role']);
 
-        $sql = "SELECT * FROM users WHERE Username = '$username' AND UserCategory = '$role' AND UserPassword = '$password'";
-        $result = $con->query($sql);
+        if ($role === 'Student') {
+            // Check for students with approved status from user_registrations table
+            $sql = "SELECT * FROM user_registrations WHERE username = ? AND password = ? AND status = 'approved'";
+        } else {
+            // Check for admin and Keselamatan Staff from users table
+            $sql = "SELECT * FROM users WHERE Username = ? AND UserCategory = ? AND UserPassword = ?";
+        }
 
-        if ($result->num_rows > 0) {
+        $stmt = $con->prepare($sql);
+        if ($role === 'Student') {
+            $stmt->bind_param("ss", $username, $password);
+        } else {
+            $stmt->bind_param("sss", $username, $role, $password);
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+
+        // Verify credentials and set session variables
+        if ($user) {
             $_SESSION['username'] = $username;
+            if ($role === 'Student') {
+                $_SESSION['user_id'] = $user['id']; // Assuming 'id' is the primary key in user_registrations
+            } else {
+                $_SESSION['user_id'] = $user['UserID']; // Assuming 'UserID' is the primary key in users
+            }
             $_SESSION['role'] = $role;
 
             if ($role === 'Administrator') {
                 header("Location: admin_dashboard.php");
             } elseif ($role === 'Student') {
-                header("Location: student_dashboard.php");
+                header("Location: user_dashboard.php");
             } elseif ($role === 'Keselamatan Staff') {
                 header("Location: staff_dashboard.php");
             }
             exit();
         } else {
             $error = "Invalid username, role, or password";
+            if ($role === 'Student') {
+                $error .= ", or your registration has not been approved.";
+            }
         }
-    }
-}
 
+        $stmt->close();
+    }
+    $con->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -44,14 +70,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <header>
         <h1>FKPark</h1>
-        <nav class=navigation>
+        <nav class="navigation">
             <a href="user_register.php">Register</a>
             <a>&#10072;</a>
             <a href="login.php">Login</a>
         </nav>
     </header>
     <div class="container">
-    <h2>Login</h2>
+        <h2>Login</h2>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br>
@@ -68,10 +94,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             <input type="submit" value="Login">
         </form>
-        <?php if(isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+        <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
     </div>
     <div class="footer">
         <p>&copy; 2024 FKPark</p>
     </div>
 </body>
 </html>
+
+
+
+
+
