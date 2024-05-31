@@ -142,16 +142,8 @@ $con->close();
             background-color: #f2f2f2;
         }
 
-        .users-container {
+        .user-list {
             display: flex;
-        }
-
-        .all-users-container {
-            margin-left: 300px;
-        }
-
-        .searched-users-container {
-            margin-right: 300px;
         }
     </style>
 </head>
@@ -170,25 +162,23 @@ $con->close();
     </header>
     <div class="content-userprofile">
         <!-- Search form -->
-        <div class="search-form">
-            <h2>Search User</h2>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <label for="userID">User ID:</label>
-                <input type="text" name="userID" id="userID">
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username">
-                <input type="submit" value="Search">
-            </form>
-        </div>
-        <!-- User information and delete button -->
-        <div class="users-container">
+        <div class="user-list">
+            <div class="search-form">
+                <h2>Search User</h2>
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <label for="userID">User ID:</label>
+                    <input type="text" name="userID" id="userID">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username">
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+            <!-- User information and delete button -->
             <div class="all-users-container">
                 <?php echo $all_users_info; ?>
             </div>
-            <div class="searched-users-container">
-                <?php echo $user_info; ?>
-            </div>
         </div>
+        <?php echo $user_info; ?>
     </div>
     <!-- Footer section -->
 </body>
