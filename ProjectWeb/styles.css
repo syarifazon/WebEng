@@ -403,22 +403,64 @@ form input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-.search-form  {
-    width: 50%;
-    margin-right: 20px;
-    flex: auto;
+.content-userprofile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
 }
 
-.all-users-container {
-    width: 50%;
-    margin-left: 20px; 
-    flex: auto;
+.user-list {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
 }
 
-@media (max-width: 768px) {
-    .search-form, .all-users-container {
-        width: 100%; /* On smaller screens, each container takes 100% width */
-        margin-right: 0; /* Remove margin to stack containers vertically */
-        margin-bottom: 20px; /* Add some space between the stacked containers */
-    }
+.search-form, .all-users-container {
+    width: 45%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-form h2, .all-users-container h2 {
+    text-align: center;
+}
+
+.search-form form label, .search-form form input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.search-form form input[type="submit"] {
+    width: auto;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-form form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.all-users-container p {
+    margin: 10px 0;
+}
+
+.user-info {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }

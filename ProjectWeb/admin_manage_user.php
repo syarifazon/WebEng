@@ -11,8 +11,8 @@ $user_info = "";
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get search criteria
-    $userID = $_POST['userID'];
-    $username = $_POST['username'];
+    $userID = isset($_POST['userID']) ? $_POST['userID'] : "";
+    $username = isset($_POST['username']) ? $_POST['username'] : "";
 
     // Check if search criteria is provided
     if (!empty($userID) || !empty($username)) {
@@ -57,7 +57,7 @@ if (isset($_POST['delete_user'])) {
     $stmt_delete->bind_param("i", $delete_user_id);
     $stmt_delete->execute();
     if ($stmt_delete->affected_rows > 0) {
-        $user_info .= "<p>User with ID: $delete_user_id has been deleted.</p>";
+        $user_info .= "<p>User with ID : $delete_user_id has been deleted.</p>";
     } else {
         $user_info .= "<p>Error deleting user.</p>";
     }
@@ -149,19 +149,18 @@ $con->close();
 </head>
 <body>
     <header>
-    <div class="navbar">
-        <h1>Manage User - FKPark</h1>
-        <div class="nav-links">
-            <a href="admin_dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-            <a href="admin_register.php"><i class="fas fa-user-plus"></i> Register User</a>
-            <a href="admin_manage_user.php"><i class="fas fa-users-cog"></i> Manage User</a>
-            <a href="manage_vehicle.php"><i class="fas fa-car"></i> Manage Vehicle</a>
-            <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <div class="navbar">
+            <h1>Manage User - FKPark</h1>
+            <div class="nav-links">
+                <a href="admin_dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="admin_register.php"><i class="fas fa-user-plus"></i> Register User</a>
+                <a href="admin_manage_user.php"><i class="fas fa-users-cog"></i> Manage User</a>
+                <a href="manage_vehicle.php"><i class="fas fa-car"></i> Manage Vehicle</a>
+                <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
         </div>
-    </div>
     </header>
     <div class="content-userprofile">
-        <!-- Search form -->
         <div class="user-list">
             <div class="search-form">
                 <h2>Search User</h2>
@@ -170,16 +169,20 @@ $con->close();
                     <input type="text" name="userID" id="userID">
                     <label for="username">Username:</label>
                     <input type="text" name="username" id="username">
-                    <input type="submit" value="Search">
+                    <input type="submit" name="search" value="Search">
                 </form>
             </div>
-            <!-- User information and delete button -->
             <div class="all-users-container">
+                
                 <?php echo $all_users_info; ?>
             </div>
         </div>
-        <?php echo $user_info; ?>
+        <div class="user-info">
+            <?php echo $user_info; ?>
+        </div>
     </div>
-    <!-- Footer section -->
+    <div class="footer">
+        <p>&copy; 2024 FKPark</p>
+    </div>
 </body>
 </html>
