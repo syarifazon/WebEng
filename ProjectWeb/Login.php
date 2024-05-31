@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($role === 'Student') {
             // Check for students with approved status from user_registrations table
-            $sql = "SELECT * FROM user_registrations WHERE username = ? AND password = ? AND status = 'approved'";
+            $sql = "SELECT * FROM users WHERE Username = ? AND UserPassword = ?";
         } else {
             // Check for admin and Keselamatan Staff from users table
             $sql = "SELECT * FROM users WHERE Username = ? AND UserCategory = ? AND UserPassword = ?";
@@ -31,26 +31,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verify credentials and set session variables
         if ($user) {
             $_SESSION['username'] = $username;
-            if ($role === 'Student') {
-                $_SESSION['user_id'] = $user['id']; // Assuming 'id' is the primary key in user_registrations
-            } else {
-                $_SESSION['user_id'] = $user['UserID']; // Assuming 'UserID' is the primary key in users
-            }
             $_SESSION['role'] = $role;
 
-            if ($role === 'Administrator') {
-                header("Location: admin_dashboard.php");
-            } elseif ($role === 'Student') {
+            if ($role === 'Student') {
+                $_SESSION['user_id'] = $user['UserID']; // Assuming 'UserID' is the primary key in users
                 header("Location: user_dashboard.php");
+            } elseif ($role === 'Administrator') {
+                $_SESSION['user_id'] = $user['UserID']; // Assuming 'UserID' is the primary key in users
+                header("Location: admin_dashboard.php");
             } elseif ($role === 'Keselamatan Staff') {
+                $_SESSION['user_id'] = $user['UserID']; // Assuming 'UserID' is the primary key in users
                 header("Location: staff_dashboard.php");
             }
             exit();
         } else {
             $error = "Invalid username, role, or password";
-            if ($role === 'Student') {
-                $error .= ", or your registration has not been approved.";
-            }
         }
 
         $stmt->close();
@@ -101,6 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </body>
 </html>
+
 
 
 

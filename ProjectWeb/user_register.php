@@ -54,10 +54,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             <label for="gender">Gender:</label>
             <select id="gender" name="gender" required>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
             </select><br><br>
-
+            
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br>
             
@@ -72,6 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </body>
 </html>
+
 
 
 
