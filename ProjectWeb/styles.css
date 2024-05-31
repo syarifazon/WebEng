@@ -286,3 +286,126 @@ h2 {
     padding: 10px;
     border-radius: 5px;
 }
+
+
+/*User Profile*/
+.content-user-dashboard, .content-userprofile {
+    background-image: url("dashboard_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the page takes at least the height of the viewport */
+    margin: 0;
+    padding: 0;
+}
+
+.content-userprofile {
+    background-image: url("dashboard_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the page takes at least the height of the viewport */
+    margin: 0;
+    padding: 0;
+}
+.card-userprofile {
+
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: auto;
+    padding: 50px;
+}
+
+.card-userprofile h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.card-userprofile table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.card-userprofile th, .card-userprofile td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.card-userprofile th {
+    background-color: #f2f2f2;
+}
+
+.edit-btn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.edit-btn button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-btn button:hover {
+    background-color: #0056b3;
+}
+
+.vehicleReg-content{
+    background-image: url("dashboard_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the page takes at least the height of the viewport */
+    margin: 0;
+    padding: 0;
+}
+.vehicleReg-form {
+    max-width: 800px;
+    margin-top: 10px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.vehicleReg-form h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.vehicleReg-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.vehicleReg-form input[type="text"],
+.vehicleReg-form select,
+.vehicleReg-form input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.vehicleReg-form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.vehicleReg-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
