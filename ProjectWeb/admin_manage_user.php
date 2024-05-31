@@ -141,6 +141,18 @@ $con->close();
         .events-table th {
             background-color: #f2f2f2;
         }
+
+        .users-container {
+            display: flex;
+        }
+
+        .all-users-container {
+            margin-left: 300px;
+        }
+
+        .searched-users-container {
+            margin-right: 300px;
+        }
     </style>
 </head>
 <body>
@@ -169,10 +181,14 @@ $con->close();
             </form>
         </div>
         <!-- User information and delete button -->
-        <div class="all-users-container">
-            <?php echo $all_users_info; ?>
+        <div class="users-container">
+            <div class="all-users-container">
+                <?php echo $all_users_info; ?>
+            </div>
+            <div class="searched-users-container">
+                <?php echo $user_info; ?>
+            </div>
         </div>
-        <?php echo $user_info; ?>
     </div>
     <!-- Footer section -->
 </body>
