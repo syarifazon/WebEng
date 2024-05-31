@@ -15,6 +15,28 @@ $stmt->execute();
 $result_user = $stmt->get_result();
 $user_data = $result_user->fetch_assoc();
 
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $fullname = $_POST['fullname'];
+    $contact = $_POST['contact'];
+    $gender = $_POST['gender'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $sql_update = "UPDATE users SET UserFullname = ?, UserContact = ?, UserGender = ?, Username = ?, UserPassword = ? WHERE UserID = ?";
+    $stmt_update = $con->prepare($sql_update);
+    $stmt_update->bind_param("sssssi", $fullname, $contact, $gender, $username, $password, $userID);
+    
+    if ($stmt_update->execute()) {
+        // Redirect to profile page after successful update
+        echo "<script type='text/javascript'> window.alert('Profile updated successfully!') </script>";
+        echo "<script type='text/javascript'> window.location='user_profile.php' </script>";
+        die();
+    } else {
+        echo "Error updating record: " . $con->error;
+    }
+}
+
 $con->close();
 ?>
 
@@ -58,6 +80,10 @@ $con->close();
         .navbar i {
             margin-right: 5px;
         }
+
+        input[type="text"] {
+            width: 70%;
+        }
     </style>
 </head>
 <body>
@@ -76,6 +102,7 @@ $con->close();
     <div class="content-userprofile">
         <div class="card-userprofile">
             <h2>User Profile</h2>
+            <form action="user_edit_profile.php" method="POST">
             <table>
                 <tr>
                     <th>User ID</th>
@@ -83,27 +110,32 @@ $con->close();
                 </tr>
                 <tr>
                     <th>Full Name</th>
-                    <td><?php echo htmlspecialchars($user_data['UserFullname']); ?></td>
+                    <td><input type="text" id="fullname" name="fullname" value="<?php echo htmlspecialchars($user_data['UserFullname']); ?>" required></td>
                 </tr>
                 <tr>
                     <th>Phone Number</th>
-                    <td><?php echo htmlspecialchars($user_data['UserContact']); ?></td>
+                    <td><input type="text" id="contact" name="contact" value="<?php echo htmlspecialchars($user_data['UserContact']); ?>" required></td>
                 </tr>
                 <tr>
                     <th>Gender</th>
-                    <td><?php echo htmlspecialchars($user_data['UserGender']); ?></td>
+                    <td>
+                        <select id="gender" name="gender" required>
+                            <option value="Male" <?php echo ($user_data['UserGender'] === 'Male') ? 'selected' : ''; ?>>Male</option>
+                            <option value="Female" <?php echo ($user_data['UserGender'] === 'Female') ? 'selected' : ''; ?>>Female</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <th>Username</th>
-                    <td><?php echo htmlspecialchars($user_data['Username']); ?></td>
+                    <td><input type="text" id="username" name="username" value="<?php echo htmlspecialchars($user_data['Username']); ?>" required></td>
                 </tr>
                 <tr>
                     <th>Password</th>
-                    <td><?php echo htmlspecialchars($user_data['UserPassword']); ?></td>
+                    <td><input type="password" id="password" name="password" value="<?php echo htmlspecialchars($user_data['UserPassword']); ?>" required></td>
                 </tr>
             </table>
             <div class="edit-btn">
-                <button onclick="window.location.href='user_edit_profile.php'">Edit</button>
+                <button type="submit">Save</button>
             </div>
         </div>
     </div>
