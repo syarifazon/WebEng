@@ -1,10 +1,10 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "9801"; /* for other group member: $password = ""; */
 
 // Create connection
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli($servername, $username, null, null, 3310); /* for other group member: $conn = new mysqli($servername, $username, $password); */
 
 // Check connection
 if ($conn->connect_error) {
@@ -41,7 +41,7 @@ function createTable($conn, $tableName, $createQuery) {
 createTable($conn, 'users', "CREATE TABLE users (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
     UserFullname VARCHAR(255) NOT NULL,
-    UserCategory VARCHAR(50) NOT NULL,  // 'admin', 'staff', 'student'
+    UserCategory VARCHAR(50) NOT NULL,  /*'admin', 'staff', 'student'*/
     UserGender VARCHAR(10) NOT NULL,
     Username VARCHAR(255) UNIQUE NOT NULL,
     UserPassword VARCHAR(255) NOT NULL,
@@ -110,6 +110,18 @@ createTable($conn, 'ParkingSpace', "CREATE TABLE ParkingSpace (
     Status BOOLEAN,
     UserID INT,
     FOREIGN KEY (UserID) REFERENCES users(UserID) ON DELETE CASCADE ON UPDATE CASCADE
+)");
+
+// Create CloseParking table
+createTable($conn, 'CloseParking', "CREATE TABLE CloseParking (
+    EventID INT AUTO_INCREMENT PRIMARY KEY,
+    EventName VARCHAR(100) NOT NULL,
+    NumberOfSpace INT NOT NULL,
+    EventDate DATE,
+    StartTime TIME,
+    EndTIme TIME,
+    ParkingSpaceID INT,
+    FOREIGN KEY (ParkingSpaceID) REFERENCES ParkingSPace(ParkingSpaceID) ON DELETE CASCADE ON UPDATE CASCADE
 )");
 
 // Create Booking table

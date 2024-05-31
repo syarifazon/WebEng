@@ -66,6 +66,7 @@ $con->close();
             <h1>User Dashboard - FKPark</h1>
             <div class="nav-links">
                 <a href="user_dashboard.php"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                <a href="user_parking_view.php"><i class="fas fa-tachometer-alt"></i>Parking</a>
                 <a href="user_profile.php"><i class="fas fa-user"></i>User Profile</a>
                 <a href="vehicle_registration.php"><i class="fas fa-car"></i>Vehicle Registration</a>
                 <a href="manage_vehicle.php"><i class="fas fa-car"></i>Manage Vehicle</a>
