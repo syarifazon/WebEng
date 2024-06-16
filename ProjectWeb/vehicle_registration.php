@@ -1,3 +1,9 @@
+<?php 
+include('connection.php');
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,9 +62,20 @@
     <div class="vehicleReg-content">
     <div class="vehicleReg-form">
         <h2>Vehicle Registration Form</h2>
+        <?php
+        $currentUser = $_SESSION['username']; 
+        $findUser = "SELECT UserID, UserFullName FROM users WHERE Username = '$currentUser' ";
+        $run = mysqli_query($con, $findUser);
+
+        $userinfo = mysqli_fetch_array($run);
+
+        ?>
         <form action="vehicle_registration_process.php" method="post" enctype="multipart/form-data">
             <label for="userID">User ID:</label>
-            <input type="text" id="userID" name="userID" required>
+            <input type="text" id="userID" name="userID" readonly value="<?php echo $userinfo['UserID'] ?>">
+
+            <label for="userFullName">User Full Name:</label>
+            <input type="text" id="userFullName" name="userFullName" readonly value="<?php echo $userinfo['UserFullName'] ?>">
 
             <label for="vehiclePlate">Vehicle Plate Number:</label>
             <input type="text" id="vehiclePlate" name="vehiclePlate" required>
@@ -76,9 +93,9 @@
             <input type="text" id="vehicleColor" name="vehicleColor" required>
 
             <label for="grantUpload">Upload Grant:</label>
-            <input type="file" id="grantUpload" name="grantUpload" accept=".pdf" required>
+            <input type="file" id="file" name="file" accept=".pdf" required>
 
-            <br><input type="submit" value="Register">
+            <br><input type="submit" name="submit" value="Register">
         </form>
     </div>
     </div>
