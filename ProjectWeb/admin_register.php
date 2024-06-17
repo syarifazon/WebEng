@@ -80,7 +80,7 @@ $result = $con->query($sql);
         <hr>
         <a href="admin_manage_user.php">Manage User</a>
         <hr>
-        <a href="manage_vehicle.php">Manage Vehicle</a>
+        <a href="admin_manage_vehicle.php">Manage Vehicle</a>
         <hr>
         <a href="logout.php">Logout</a>
         <hr>
