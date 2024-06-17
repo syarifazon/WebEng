@@ -44,25 +44,40 @@ $currentUser = $_SESSION['username'];
         .navbar i {
             margin-right: 5px;
         }
+        .content-user-dashboard {
+            flex: 0;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
     <header>
-        <div class="navbar">
+        <!-- <div class="navbar"> -->
             <h1>Vehicle Approval - FKPark</h1>
-            <div class="nav-links">
+            <!-- <div class="nav-links">
                 <a href="staff_dashboard.php"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                <!-- <a href="user_profile.php"><i class="fas fa-user"></i>User Profile</a>
-                <a href="vehicle_registration.php"><i class="fas fa-car"></i>Vehicle Registration</a> -->
                 <a href="staff_manage_vehicle.php"><i class="fas fa-car"></i>Manage Vehicle</a>
                 <a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
             </div>
-        </div>
+        </div> -->
     </header>
+    <div class="sidebar">
+        <hr>
+        <a href="user_dashboard.php">Dashboard</a>
+        <hr>
+        <a href="user_profile.php">User Profile</a>
+        <hr>
+        <a href="vehicle_registration.php">Vehicle Registration</a>
+        <hr>
+        <a href="user_manage_vehicle.php">Manage Vehicle</a>
+        <hr>
+        <a href="logout.php">Logout</a>
+        <hr>
+    </div>
     <div class="vehicleReg-content">
     <div class="vehicleReg-form">
         <h2>Vehicle Approval</h2>
-        <table>
+        <table width="100%">
             <thead>
                 <tr>
                     <!-- <th>Name</th>

@@ -4,6 +4,7 @@ body {
     min-height: 100vh; /* Ensure the page takes at least the height of the viewport */
     margin: 0;
     padding: 0;
+    width: 100%; /* Ensure the footer spans the entire width */
 }
 
 .footer {
@@ -145,6 +146,7 @@ form input[type="submit"]:hover {
     padding-top: 69px;
     bottom: 0;
     overflow: auto;
+    opacity: 0.6;
 }
 
 .sidebar a {
@@ -302,6 +304,15 @@ form input[type="submit"]:hover {
     margin: 0;
     padding: 0;
 }
+.content-vehicle {
+    background-image: url("dashboard_bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the page takes at least the height of the viewport */
+    margin: 0;
+    padding: 0;
+}
 .card-userprofile {
 
     border-radius: 10px;
@@ -408,10 +419,25 @@ form input[type="submit"]:hover {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding: 20px;
+    padding: 20px 0 20px 60px;
+}
+
+.content-vehicle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0 20px 60px;
 }
 
 .user-list {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.vehicle-list {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -426,7 +452,19 @@ form input[type="submit"]:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.search-form, .all-vehicle-container {
+    width: 45%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .search-form h2, .all-users-container h2 {
+    text-align: center;
+}
+
+.search-form h2, .all-vehicle-container h2 {
     text-align: center;
 }
 
@@ -454,7 +492,22 @@ form input[type="submit"]:hover {
     margin: 10px 0;
 }
 
+.all-vehicle-container p {
+    margin: 10px 0;
+}
+
 .user-info {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.vehicle-info {
     width: 100%;
     max-width: 600px;
     margin-top: 20px;

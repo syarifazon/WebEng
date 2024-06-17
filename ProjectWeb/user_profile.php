@@ -61,7 +61,7 @@ $con->close();
     </style>
 </head>
 <body>
-    <header>
+    <!-- <header>
         <div class="navbar">
             <h1>User Profile - FKPark</h1>
             <div class="nav-links">
@@ -72,7 +72,32 @@ $con->close();
                 <a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
             </div>
         </div>
+    </header> -->
+    <header>
+        <!-- <div class="navbar"> -->
+            <h1>User Profile - FKPark</h1>
+            <!-- <div class="nav-links">
+                <a href="user_dashboard.php"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                <a href="user_profile.php"><i class="fas fa-user"></i>User Profile</a>
+                <a href="vehicle_registration.php"><i class="fas fa-car"></i>Vehicle Registration</a>
+                <a href="manage_vehicle.php"><i class="fas fa-car"></i>Manage Vehicle</a>
+                <a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            </div>
+        </div> -->
     </header>
+    <div class="sidebar">
+        <hr>
+        <a href="user_dashboard.php">Dashboard</a>
+        <hr>
+        <a href="user_profile.php">User Profile</a>
+        <hr>
+        <a href="vehicle_registration.php">Vehicle Registration</a>
+        <hr>
+        <a href="user_manage_vehicle.php">Manage Vehicle</a>
+        <hr>
+        <a href="logout.php">Logout</a>
+        <hr>
+    </div>
     <div class="content-userprofile">
         <div class="card-userprofile">
             <h2>User Profile</h2>

@@ -6,76 +6,84 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
 }
 require_once('connection.php');
 
-$user_info = "";
+$vehicle_info = "";
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get search criteria
-    $userID = isset($_POST['userID']) ? $_POST['userID'] : "";
-    $username = isset($_POST['username']) ? $_POST['username'] : "";
+    $vehicleid = isset($_POST['vehicleID']) ? $_POST['vehicleID'] : "";
+    $vehiclePlate = isset($_POST['vehiclePlate']) ? $_POST['vehiclePlate'] : "";
 
     // Check if search criteria is provided
-    if (!empty($userID) || !empty($username)) {
+    if (!empty($vehicleid) || !empty($vehiclePlate)) {
         // Construct SQL query based on provided search criteria
-        $sql = "SELECT * FROM users WHERE UserID = ? OR Username = ?";
+        // $sql = "SELECT * FROM vehicles WHERE VehicleID = ? OR VehiclePlate = ?";
+        $sql = "SELECT u.*, v.*, vs.*, qr.*
+                FROM users u
+                JOIN vehicles v ON u.UserID = v.UserID
+                JOIN vehiclestickers vs ON v.VehicleID = vs.VehicleID
+                JOIN qrcode qr ON vs.VehicleStickerID = qr.VehicleStickerID
+                WHERE v.VehicleID = ? OR v.VehiclePlate = ?";
         $stmt = $con->prepare($sql);
-        $stmt->bind_param("ss", $userID, $username);
+        $stmt->bind_param("ss", $vehicleid, $vehiclePlate);
         $stmt->execute();
         $result = $stmt->get_result();
+
+        // $findQr = "SELECT qr.QRCodeImage, ";
 
         // Check if user is found
         if ($result->num_rows > 0) {
             // Display user information and delete button
-            $user_info .= "<h2>User Information</h2>";
+            $vehicle_info .= "<h2>Vehicle Information</h2>";
             while ($row = $result->fetch_assoc()) {
-                $user_info .= "<div>";
-                $user_info .= "<p>User ID: " . $row['UserID'] . "</p>";
-                $user_info .= "<p>Username: " . $row['Username'] . "</p>";
-                $user_info .= "<p>Full Name: " . $row['UserFullname'] . "</p>";
-                $user_info .= "<p>Contact: " . $row['UserContact'] . "</p>";
+                $vehicle_info .= "<div>";
+                $vehicle_info .= "<p>Full Name: " . $row['UserFullname'] . "</p>";
+                $vehicle_info .= "<p>Contact: " . $row['UserContact'] . "</p>";
+                $vehicle_info .= "<p>Vehicle Plate: " . $row['VehiclePlate'] . "</p>";
+                $vehicle_info .= "<img src= ' " . $row['QRCodeImage'] . " '>";
                 // Add more user information fields as needed
-                $user_info .= "<form action='admin_manage_user.php' method='post'>";
-                $user_info .= "<input type='hidden' name='delete_user_id' value='" . $row['UserID'] . "'>";
-                $user_info .= "<input type='submit' name='delete_user' value='Delete'>";
-                $user_info .= "</form>";
-                $user_info .= "</div>";
+                $vehicle_info .= "<form action='admin_manage_vehicle.php' method='post'>";
+                $vehicle_info .= "<input type='hidden' name='delete_vehicle_id' value='" . $row['VehicleID'] . "'>";
+                $vehicle_info .= "<input type='submit' name='delete_vehicle' value='Delete'>";
+                $vehicle_info .= "</form>";
+                $vehicle_info .= "</div>";
             }
         } else {
-            $user_info = "<p>No user found with the provided criteria.</p>";
+            $vehicle_info = "<p>No vehicle found with the provided criteria.</p>";
         }
     } else {
-        $user_info = "<p>Please provide user ID or username to search.</p>";
+        $vehicle_info = "<p>Please provide vehicle ID or vehicle plate number to search.</p>";
     }
 }
 
 // Handle delete request
 if (isset($_POST['delete_user'])) {
-    $delete_user_id = $_POST['delete_user_id'];
+    $delete_vehicle_id = $_POST['delete_vehicle_id'];
     // Perform deletion from the database
-    $sql_delete = "DELETE FROM users WHERE UserID = ?";
+    $sql_delete = "DELETE FROM vehicles WHERE VehicleID = ?";
     $stmt_delete = $con->prepare($sql_delete);
-    $stmt_delete->bind_param("i", $delete_user_id);
+    $stmt_delete->bind_param("i", $delete_vehicle_id);
     $stmt_delete->execute();
     if ($stmt_delete->affected_rows > 0) {
-        $user_info .= "<p>User with ID : $delete_user_id has been deleted.</p>";
+        $vehicle_info .= "<p>Vehicle with ID : $delete_vehicle_id has been deleted.</p>";
     } else {
-        $user_info .= "<p>Error deleting user.</p>";
+        $vehicle_info .= "<p>Error deleting vehicle.</p>";
     }
 }
 
-$sql_all_users = "SELECT UserID, Username FROM users";
-$result_all_users = $con->query($sql_all_users);
-$all_users_info = "";
+$sql_all_vehicle = "SELECT VehicleID, VehiclePlate FROM vehicles";
+$result_all_vehicle = $con->query($sql_all_vehicle);
+$all_vehicle_info = "";
 
 // Check if there are users
-if ($result_all_users->num_rows > 0) {
-    // Display all user IDs with their usernames
-    $all_users_info .= "<h2>All Users</h2>";
-    while ($row = $result_all_users->fetch_assoc()) {
-        $all_users_info .= "<p>User ID: " . $row['UserID'] . ", Username: " . $row['Username'] . "</p>";
+if ($result_all_vehicle->num_rows > 0) {
+    // Display all vehicle IDs with their plate number
+    $all_vehicle_info .= "<h2>All Vehicles</h2>";
+    while ($row = $result_all_vehicle->fetch_assoc()) {
+        $all_vehicle_info .= "<p>Vehicle ID: " . $row['VehicleID'] . ", Plate Number: " . $row['VehiclePlate'] . "</p>";
     }
 } else {
-    $all_users_info = "<p>No users found.</p>";
+    $all_vehicle_info = "<p>No vehicles found.</p>";
 }
 
 $con->close();
@@ -86,7 +94,7 @@ $con->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage User - Admin Panel</title>
+    <title>Manage Vehicle - Admin Panel</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         .chart-container {
@@ -142,7 +150,7 @@ $con->close();
             background-color: #f2f2f2;
         }
 
-        .user-list {
+        .vehicle-list {
             display: flex;
         }
     </style>
@@ -161,7 +169,7 @@ $con->close();
         </div>
     </header> -->
     <header>
-            <h1>Manage User - FKPark</h1>
+            <h1>Manage Vehicle - FKPark</h1>
     </header>
     
             <!-- <div class="sidebar">
@@ -180,31 +188,31 @@ $con->close();
         <hr>
         <a href="admin_manage_user.php">Manage User</a>
         <hr>
-        <a href="manage_vehicle.php">Manage Vehicle</a>
+        <a href="admin_manage_vehicle.php">Manage Vehicle</a>
         <hr>
         <a href="logout.php">Logout</a>
         <hr>
     </div>
 
-    <div class="content-userprofile">
-        <div class="user-list">
+    <div class="content-vehicle">
+        <div class="vehicle-list">
             <div class="search-form">
-                <h2>Search User</h2>
+                <h2>Search Vehicle</h2>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                    <label for="userID">User ID:</label>
-                    <input type="text" name="userID" id="userID">
-                    <label for="username">Username:</label>
-                    <input type="text" name="username" id="username">
+                    <label for="vehicleID">Vehicle ID:</label>
+                    <input type="text" name="vehicleID" id="vehicleID">
+                    <label for="vehiclePlate">Plate Number:</label>
+                    <input type="text" name="vehiclePlate" id="vehiclePlate">
                     <input type="submit" name="search" value="Search">
                 </form>
             </div>
             <div class="all-vehicle-container">
                 
-                <?php echo $all_users_info; ?>
+                <?php echo $all_vehicle_info; ?>
             </div>
         </div>
-        <div class="user-info">
-            <?php echo $user_info; ?>
+        <div class="vehicle-info">
+            <?php echo $vehicle_info; ?>
         </div>
     </div>
     <div class="footer">

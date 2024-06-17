@@ -52,7 +52,7 @@ $result = $con->query($sql);
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+    <!-- <header>
         <h1>FKPark Admin</h1>
         <nav>
             <a href="admin_dashboard.php">Dashboard</a>
@@ -61,7 +61,30 @@ $result = $con->query($sql);
             <a href="manage_vehicle.php">Manage Vehicle</a>
             <a href="logout.php">Logout</a>
         </nav>
+    </header> -->
+    <header>
+        <h1>FKPark Admin</h1>
+        <!-- <nav>
+            <a href="admin_dashboard.php">Dashboard</a>
+            <a href="admin_register.php">Register User</a>
+            <a href="admin_manage_user.php">Manage User</a>
+            <a href="manage_vehicle.php">Manage Vehicle</a>
+            <a href="logout.php">Logout</a>
+        </nav> -->
     </header>
+    <div class="sidebar">
+        <hr>
+        <a href="admin_dashboard.php">Dashboard</a>
+        <hr>
+        <a href="admin_register.php">Register User</a>
+        <hr>
+        <a href="admin_manage_user.php">Manage User</a>
+        <hr>
+        <a href="manage_vehicle.php">Manage Vehicle</a>
+        <hr>
+        <a href="logout.php">Logout</a>
+        <hr>
+    </div>
     <div class="content">
         <h2>Pending User Registrations</h2>
         <?php
