@@ -186,6 +186,8 @@ $con->close();
         <hr>
         <a href="admin_register.php">Register User</a>
         <hr>
+        <a href="admin_parking_dashboard.php">Manage Parking</a>
+        <hr>
         <a href="admin_manage_user.php">Manage User</a>
         <hr>
         <a href="admin_manage_vehicle.php">Manage Vehicle</a>

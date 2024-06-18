@@ -1,11 +1,11 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "9801"; /* for other group member: $password = ""; */
+$password = ""; /* for other group member: $password = "9801"; */
 
 // Create connection
-$conn = new mysqli($servername, $username, null, null, 3310); /* for other group member: $conn = new mysqli($servername, $username, $password); */
-
+ /* for other group member: $conn = new mysqli($servername, $username, null, null, 3310); */
+$conn = new mysqli($servername, $username, $password);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

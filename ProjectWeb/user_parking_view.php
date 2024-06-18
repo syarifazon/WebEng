@@ -82,13 +82,21 @@ $con->close();
         <h1>User Parking Dashboard - FKPark</h1>
     </header>
     <div class="dashboard">
-        <div class="sidebar">
-            <hr>
-            <a href="user_dashboard.php">Return</a>
-            <hr>
-            <a href="Logout.php">Logout</a>
-            <hr>
-        </div>
+    <div class="sidebar">
+        <hr>
+        <a href="user_dashboard.php">Dashboard</a>
+        <hr>
+        <a href="user_parking_view.php">Parking</a>
+        <hr>
+        <a href="user_profile.php">User Profile</a>
+        <hr>
+        <a href="vehicle_registration.php">Vehicle Registration</a>
+        <hr>
+        <a href="user_manage_vehicle.php">Manage Vehicle</a>
+        <hr>
+        <a href="logout.php">Logout</a>
+        <hr>
+    </div>
 
         <div class="table-container">
             <h2>Parking Spaces</h2>
