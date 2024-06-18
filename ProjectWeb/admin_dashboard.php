@@ -93,15 +93,15 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
             <p>This is your dashboard. You can manage users, register new users, manage vehicles, and more.</p>
         </div>
         <div class="chart-container">
-            <div class="chart">
+        <div class="chart">
                 <h3>Staff Parking Space</h3>
                 <canvas id="staffParkingChart" width="200" height="200"></canvas>
-                <p>Used: 148, Empty: 52</p>
+                <p>Used: , Empty: </p>
             </div>
             <div class="chart">
                 <h3>Student Parking Space</h3>
                 <canvas id="studentParkingChart" width="200" height="200"></canvas>
-                <p>Used: 169, Empty: 31</p>
+                <p>Used: , Empty: </p>
             </div>
         </div>
         <div class="footer">
@@ -115,7 +115,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
             labels: ['Used', 'Empty'],
             datasets: [{
                 label: 'Parking Space',
-                data: [148, 52],
+                data: [0, 200],
                 backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
                 borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
                 borderWidth: 1
@@ -146,7 +146,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
             labels: ['Used', 'Empty'],
             datasets: [{
                 label: 'Parking Space',
-                data: [169, 31],
+                data: [0, 200],
                 backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
                 borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
                 borderWidth: 1
