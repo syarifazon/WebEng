@@ -1,12 +1,15 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = ""; /* for other group member: $password = ""; */
-// $password = ""; /* for other group member: $password = "9801"; */
+
+//$password = "9801"; for other group member:
+// $password = ""; /* for other group member:
+ $password = ""; 
 
 // Create connection
-// $conn = new mysqli($servername, $username, null, null, 3310); /* for other group member: $conn = new mysqli($servername, $username, $password); */
 $conn = new mysqli($servername, $username, $password);
+// $conn = new mysqli($servername, $username, null, null, 3310); /* for other group member: $conn = new mysqli($servername, $username, $password); */
+// $conn = new mysqli($servername, $username, $password);
 
 // Check connection
 if ($conn->connect_error) {
@@ -103,7 +106,7 @@ createTable($conn, 'RegistrationVehicle', "CREATE TABLE RegistrationVehicle (
     Date DATE,
     UserID INT,
     VehicleID INT,
-    FOREIGN KEY (UserID) REFERENCES users(UserID) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (UserID) REFERENCES users(UserID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (VehicleID) REFERENCES Vehicles(VehicleID) ON DELETE CASCADE ON UPDATE CASCADE
 )");
 
