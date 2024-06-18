@@ -88,12 +88,10 @@ $result = $con->query($sql);
         <hr>
     </div>
     <div class="content">
-        <div class="content-admin-register">
         <h2>Pending User Registrations</h2>
-        <br><br>
         <?php
         if ($result->num_rows > 0) {
-            echo "<table width='100%' >";
+            echo "<table>";
             echo "<tr><th>Name</th><th>Email</th><th>Phone Number</th><th>Gender</th><th>Username</th><th>Actions</th></tr>";
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
@@ -106,7 +104,6 @@ $result = $con->query($sql);
                         <form method='post' action='admin_register.php'>
                             <input type='hidden' name='registration_id' value='" . $row["ID"] . "'>
                             <input type='submit' name='approve' value='Approve'>
-                            <br><br>
                             <input type='submit' name='reject' value='Reject'>
                         </form>
                       </td>";
@@ -119,7 +116,6 @@ $result = $con->query($sql);
 
         $con->close();
         ?>
-        </div>
     </div>
     <div class="footer">
         <p>&copy; 2024 FKPark</p>

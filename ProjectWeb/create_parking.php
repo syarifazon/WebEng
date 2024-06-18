@@ -1,5 +1,13 @@
-<?php
+<?php 
 require_once('connection.php');
+include("../phpqrcode/qrlib.php");
+session_start();
+
+$PNG_TEMP_DIR = 'qr-image/';
+if (!file_exists($PNG_TEMP_DIR))
+    mkdir($PNG_TEMP_DIR);
+
+$qrImage = '';
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -10,7 +18,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             VALUES ('$numberOfSpace', '$status')";
     
     if ($con->query($sql) === TRUE) {
-        echo "<script type='text/javascript'>alert('Parking space has been successfully created');</script>";
+        // Get the last inserted ID
+        $parkingSpaceID = $con->insert_id;
+
+        // Generate QR code
+        $codeString = "Parking Space ID: " . $parkingSpaceID . "\n";
+        $codeString .= "Number of Spaces: " . $numberOfSpace . "\n";
+        $codeString .= "Status: " . ($status == 1 ? 'Available' : 'Not Available');
+
+        $filename = $PNG_TEMP_DIR . 'parkingSpace' . md5($codeString) . '.png';
+
+        QRcode::png($codeString, $filename);
+
+        // Insert QR code information into qrcode table
+        $addQr = "INSERT INTO qrcode (QRCodeImage, ParkingSpaceID) VALUES ('$filename', '$parkingSpaceID')";
+        if ($con->query($addQr) === TRUE) {
+            echo "<script type='text/javascript'>alert('Parking space has been successfully created and QR code generated');</script>";
+            $qrImage = $filename;
+        } else {
+            echo "Error: " . $addQr . "<br>" . $con->error;
+        }
     } else {
         echo "Error: " . $sql . "<br>" . $con->error;
     }
@@ -103,6 +130,18 @@ $con->close();
         .form button[type="submit"]:hover {
             background-color: #45a049;
         }
+
+        .qr-image {
+            margin-top: 20px;
+        }
+
+        .qr-image img {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -141,6 +180,12 @@ $con->close();
 
                 <button type="submit">Create</button>
             </form>
+            <?php if (!empty($qrImage)): ?>
+        <div class="qr-image">
+            <h3>Generated QR Code for Parking Space:</h3>
+            <img src="<?php echo $qrImage; ?>" alt="QR Code">
+        </div>
+        <?php endif; ?>
         </div>
     
         <div class="footer">
@@ -149,3 +194,4 @@ $con->close();
     </div>
 </body>
 </html>
+

@@ -80,7 +80,7 @@ $con->close();
             background-color: white;
             width: 50%;
             padding: 10px 20px;
-            margin-left: 160px;
+            margin-left: 210px;
             margin-bottom: 20px;
             border-radius: 10px;
         }
@@ -117,8 +117,37 @@ $con->close();
     </div>
     <div class="content-user-dashboard">
         
-        <div class="dashboard" style="margin-left:205px;">
-        <h2>Welcome, <?php echo htmlspecialchars($user_data['UserFullname']); ?></h2>
+        <div class="dashboard">
+        <h2 class="content">Welcome, <?php echo htmlspecialchars($user_data['UserFullname']); ?></h2>
+            <div class="stat_table">
+                <h3>User Information</h3>
+                <table>
+                    <tr>
+                        <th>User ID</th>
+                        <td><?php echo htmlspecialchars($user_data['UserID']); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Full Name</th>
+                        <td><?php echo htmlspecialchars($user_data['UserFullname']); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Category</th>
+                        <td><?php echo htmlspecialchars($user_data['UserCategory']); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td><?php echo htmlspecialchars($user_data['UserGender']); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Username</th>
+                        <td><?php echo htmlspecialchars($user_data['Username']); ?></td>
+                    </tr>
+                    <tr>
+                        <th>Contact</th>
+                        <td><?php echo htmlspecialchars($user_data['UserContact']); ?></td>
+                    </tr>
+                </table>
+            </div>
             <!-- Placeholder for future user functionalities -->
             <div class="user_functions">
                 
