@@ -28,6 +28,7 @@ insertUser('Muhamad Syarifudin', 'Administrator', 'Male', 'admin', 'admin123', '
 // Insert Keselamatan Staff user
 insertUser('Haikal', 'Keselamatan Staff', 'Male', 'staff', 'staff123', '0189068595', $con);
 
+
 $con->close();
 ?>
 
