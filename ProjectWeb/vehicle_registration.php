@@ -63,6 +63,8 @@ session_start();
         <hr>
         <a href="user_dashboard.php">Dashboard</a>
         <hr>
+        <a href="user_parking_view.php">Parking</a>
+        <hr>
         <a href="user_profile.php">User Profile</a>
         <hr>
         <a href="vehicle_registration.php">Vehicle Registration</a>

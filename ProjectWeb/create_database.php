@@ -2,6 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = ""; /* for other group member: $password = ""; */
+// $password = ""; /* for other group member: $password = "9801"; */
 
 // Create connection
 // $conn = new mysqli($servername, $username, null, null, 3310); /* for other group member: $conn = new mysqli($servername, $username, $password); */

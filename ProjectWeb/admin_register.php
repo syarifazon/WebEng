@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registration_id'])) {
                 // Update the status of the registration request
                 $sql_update = "UPDATE user_registrations SET status='approved' WHERE id='$registration_id'";
                 $con->query($sql_update);
-                echo "<p>User approved and registered successfully.</p>";
+                echo "<script type='text/javascript'>alert('User approved and registered successfully.');</script>";
             } else {
                 echo "Error: " . $sql_insert . "<br>" . $con->error;
             }
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registration_id'])) {
         // Reject the registration
         $sql_update = "UPDATE user_registrations SET status='rejected' WHERE id='$registration_id'";
         if ($con->query($sql_update) === TRUE) {
-            echo "<p>User registration rejected.</p>";
+            echo "<script type='text/javascript'>alert('User registration rejected.');</script>";
         } else {
             echo "Error: " . $sql_update . "<br>" . $con->error;
         }
@@ -77,6 +77,8 @@ $result = $con->query($sql);
         <a href="admin_dashboard.php">Dashboard</a>
         <hr>
         <a href="admin_register.php">Register User</a>
+        <hr>
+        <a href="admin_parking_dashboard.php">Manage Parking</a>
         <hr>
         <a href="admin_manage_user.php">Manage User</a>
         <hr>
