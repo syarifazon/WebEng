@@ -162,22 +162,8 @@ form input[type="submit"]:hover {
 }
 
 .content {
-    background-image: url("dashboard_bg.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensure the page takes at least the height of the viewport */
-}
-
-.content-admin-register {
-    background-color: white;
-    text-align: center;
     margin-top: 10px;
-    margin-left: 260px; /* Adjust this value based on sidebar width */
-    margin-right: 60px;
-    padding: 15px 30px;
-    border-radius: 10px;
+    margin-left: 210px; /* Adjust this value based on sidebar width */
 }
 
 .stat_table {
@@ -384,7 +370,7 @@ form input[type="submit"]:hover {
     padding: 0;
 }
 .vehicleReg-form {
-    max-width: 900px;
+    max-width: 800px;
     margin-top: 10px;
     margin: 0 auto;
     padding: 20px;
