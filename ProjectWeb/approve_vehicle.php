@@ -10,7 +10,7 @@ if (!file_exists($PNG_TEMP_DIR))
 
 if(isset($_POST['submit'])) {
     
-    echo $regvehId = $_POST['regvehicleid'];
+    $regvehId = $_POST['regvehicleid'];
 
     $sql = "SELECT u.*, rv.*
             FROM users u
