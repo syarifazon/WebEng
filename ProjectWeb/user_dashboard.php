@@ -148,6 +148,8 @@ $con->close();
                     </tr>
                 </table>
             </div>
+        <div class="dashboard" style="margin-left:205px;">
+        <h2>Welcome, <?php echo htmlspecialchars($user_data['UserFullname']); ?></h2>
             <!-- Placeholder for future user functionalities -->
             <div class="user_functions">
                 

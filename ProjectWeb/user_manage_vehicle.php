@@ -124,10 +124,18 @@ $currentUser = $_SESSION['username'];
                                     $get = mysqli_query($con, $vehicleSticker);
                                     $qr = mysqli_fetch_array($get);
 
+                                    if($qr) {
+                                        ?>
+                                        <img src="<?php echo $qr['QRCodeImage'] ?>">
+                                        <?php
+                                    }
+                                    else {
+                                        echo "Sticker pending approval";
+                                    }
+
                                     
                                     ?>
 
-                                    <img src="<?php echo $qr['QRCodeImage'] ?>">
                                 </td>
                             </tr>
                         <?php

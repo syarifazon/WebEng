@@ -23,10 +23,10 @@ function insertUser($fullname, $category, $gender, $username, $password, $contac
 }
 
 // Insert admin user
-insertUser('Muhamad Syarifudin', 'Administrator', 'Male', 'admin', 'admin_123', '0197552553', $con);
+insertUser('Muhamad Syarifudin', 'Administrator', 'Male', 'admin', 'admin123', '0197552553', $con);
 
 // Insert Keselamatan Staff user
-insertUser('Haikal', 'Keselamatan Staff', 'Male', 'staff', 'staff_password', '0189068595', $con);
+insertUser('Haikal', 'Keselamatan Staff', 'Male', 'staff', 'staff123', '0189068595', $con);
 
 $con->close();
 ?>
