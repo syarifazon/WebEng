@@ -37,7 +37,7 @@ if(isset($_POST['submit'])) {
             // pending => 0
             // approved => 1
 
-            $findVehicleID = "SELECT VehicleID FROM vehicles WHERE vehicle";
+            //$findVehicleID = "SELECT VehicleID FROM vehicles WHERE vehicle";
 
             $addStatus = "INSERT INTO registrationvehicle (Status, Date, UserID, VehicleID) VALUES (0, CURRENT_TIMESTAMP, '$userId', LAST_INSERT_ID()) ";
             $result = mysqli_query($con, $addStatus);
