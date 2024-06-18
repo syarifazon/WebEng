@@ -87,7 +87,7 @@ $result = $con->query($sql);
         <a href="logout.php">Logout</a>
         <hr>
     </div>
-    <div class="content">
+    <div class="content-userprofile">
         <h2>Pending User Registrations</h2>
         <?php
         if ($result->num_rows > 0) {
