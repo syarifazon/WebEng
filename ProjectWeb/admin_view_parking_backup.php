@@ -1,5 +1,12 @@
 <?php
 require_once('connection.php');
+include("../phpqrcode/qrlib.php");
+session_start();
+
+$PNG_TEMP_DIR = 'qr-image/';
+if (!file_exists($PNG_TEMP_DIR))
+    mkdir($PNG_TEMP_DIR);
+
 
 // Handle form submission for deletion
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

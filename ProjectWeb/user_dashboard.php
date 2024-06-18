@@ -80,7 +80,7 @@ $con->close();
             background-color: white;
             width: 50%;
             padding: 10px 20px;
-            margin-left: 160px;
+            margin-left: 210px;
             margin-bottom: 20px;
             border-radius: 10px;
         }
@@ -118,7 +118,7 @@ $con->close();
     <div class="content-user-dashboard">
         
         <div class="dashboard">
-        <h2>Welcome, <?php echo htmlspecialchars($user_data['UserFullname']); ?></h2>
+        <h2 class="content">Welcome, <?php echo htmlspecialchars($user_data['UserFullname']); ?></h2>
             <div class="stat_table">
                 <h3>User Information</h3>
                 <table>

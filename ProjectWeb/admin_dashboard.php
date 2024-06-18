@@ -19,72 +19,75 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
         .chart-container {
             display: flex;
             justify-content: space-between;
+            margin-left: 220px;
         }
         .chart {
-            width: 40%;
+            width: 35%;
         }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: transparent; /* Make navbar background transparent */
-            padding: 10px;
+        .sidebar {
+            height: 100%;
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            top: 0; /* Adjust the value to lower the sidebar */
+            left: 0;
+            background-color: #4E4E4E;
+            overflow-x: hidden;
+            padding-top: 69px;
+            bottom: 0;
+            overflow: auto;
+            opacity: 0.6;
         }
-        .navbar h1 {
-            color: #000;
-            background-color: transparent; /* Make title background transparent */
-        }
-        .nav-links {
-            display: flex;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .nav-links a {
-            color: #000;
-            background-color: transparent;
+
+        .sidebar a {
+            padding: 10px 15px;
             text-decoration: none;
-            padding: 5px;
-            display: flex;
-            align-items: center;
-            margin-left: 10px;
+            font-size: 18px;
+            color: #f1f1f1;
+            display: block;
         }
-        .nav-links a:hover {
-            background-color: #ddd;
-        }
-        .navbar i {
-            margin-right: 5px;
+
+        .sidebar a:hover {
+            color: #37C8BB;
         }
         .events-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            z-index: 9999;
         }
         .events-table th, .events-table td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
+            z-index: 9999;
         }
         .events-table th {
             background-color: #f2f2f2;
+            z-index: 9999;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="navbar">
-            <h1>Administrator Dashboard - FKPark</h1>
-            <div class="nav-links">
-                <a href="admin_dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                <a href="admin_register.php"><i class="fas fa-user-plus"></i> Register User</a>
-                <a href="admin_parking_dashboard.php"><i class="fas fa-tachometer-alt"></i> Manage Parking</a>
-                <a href="admin_manage_user.php"><i class="fas fa-users-cog"></i> Manage User</a>
-                <a href="admin_manage_vehicle.php"><i class="fas fa-car"></i> Manage Vehicle</a>
-                <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
-            </div>
-        </div>
+        <h1>Administrator Dashboard - FKPark</h1>
     </header>
     <div class="dashboard">
+    <div class="sidebar">
+                <hr>
+                <a href="admin_dashboard.php">Dashboard</a>
+                <hr>
+                <a href="admin_register.php">Register User</a>
+                <hr>
+                <a href="admin_parking_dashboard.php">Manage Parking</a>
+                <hr>
+                <a href="admin_manage_user.php">Manage User</a>
+                <hr>
+                <a href="admin_manage_vehicle.php">Manage Vehicle</a>
+                <hr>
+                <a href="logout.php">Logout</a>
+                <hr>
+            </div>
         <div class="content">
             <h2>Welcome, Administrator!</h2>
             <p>This is your dashboard. You can manage users, register new users, manage vehicles, and more.</p>
@@ -100,35 +103,6 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'Administrator') {
                 <canvas id="studentParkingChart" width="200" height="200"></canvas>
                 <p>Used: 169, Empty: 31</p>
             </div>
-        </div>
-        <div class="event_chart">
-            <h3>Faculty of Computing Events</h3>
-            <table class="events-table">
-                <thead>
-                    <tr>
-                        <th>Event</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Jamuan Raya</td>
-                        <td>24 April 2024</td>
-                        <td>10.00 a.m - 2.00 p.m</td>
-                    </tr>
-                    <tr>
-                        <td>Window Cleaning Maintenance Left Wing</td>
-                        <td>3 May 2024</td>
-                        <td>10.00 a.m - 12.00 p.m</td>
-                    </tr>
-                    <tr>
-                        <td>Window Cleaning Maintenance Right Wing</td>
-                        <td>3 May 2024</td>
-                        <td>2.00 p.m - 4.00 p.m</td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
         <div class="footer">
             <p>&copy; 2024 FKPark</p>

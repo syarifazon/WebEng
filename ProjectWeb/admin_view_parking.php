@@ -1,8 +1,10 @@
-<?php
+<?php 
 require_once('connection.php');
 
-// Fetch the data from the ParkingSpace table
-$sql = "SELECT * FROM ParkingSpace";
+// Fetch the data from the ParkingSpace table and join with QRCode table
+$sql = "SELECT ParkingSpace.ParkingSpaceID, ParkingSpace.NumberOfSpace, ParkingSpace.Status, QRCode.QRCodeImage 
+        FROM ParkingSpace 
+        LEFT JOIN QRCode ON ParkingSpace.ParkingSpaceID = QRCode.ParkingSpaceID";
 $result = $con->query($sql);
 
 $con->close();
@@ -22,7 +24,6 @@ $con->close();
             position: fixed;
             z-index: 1;
             top: 0;
-            /* Adjust the value to lower the sidebar */
             left: 0;
             background-color: #4E4E4E;
             overflow-x: hidden;
@@ -75,6 +76,11 @@ $con->close();
         table tr:hover {
             background-color: #ddd;
         }
+
+        .qr-code img {
+            width: 100px;
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -108,6 +114,7 @@ $con->close();
                         <th>Parking Space ID</th>
                         <th>Number of Spaces</th>
                         <th>Status</th>
+                        <th>QR Code</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -118,10 +125,11 @@ $con->close();
                                     <td>{$row['ParkingSpaceID']}</td>
                                     <td>{$row['NumberOfSpace']}</td>
                                     <td>" . ($row['Status'] ? 'Available' : 'Not Available') . "</td>
+                                    <td class='qr-code'>" . (!empty($row['QRCodeImage']) ? "<img src='{$row['QRCodeImage']}' alt='QR Code'>" : "No QR Code") . "</td>
                                   </tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='3'>No parking spaces found</td></tr>";
+                        echo "<tr><td colspan='4'>No parking spaces found</td></tr>";
                     }
                     ?>
                 </tbody>
@@ -134,4 +142,5 @@ $con->close();
     </div>
 </body>
 </html>
+
 

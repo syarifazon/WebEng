@@ -1,11 +1,12 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = ""; /* for other group member: $password = "9801"; */
+$password = "9801"; /* for haiqal only: $password = "9801"; */
 
 // Create connection
- /* for other group member: $conn = new mysqli($servername, $username, null, null, 3310); */
-$conn = new mysqli($servername, $username, $password);
+ /* for haiqal only: $conn = new mysqli($servername, $username, null, null, 3310); */
+ /* for other group member: $conn = new mysqli($servername, $username, $password); */
+ $conn = new mysqli($servername, $username, null, null, 3310);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
