@@ -49,32 +49,5 @@ if($_GET['gettop'])
     die;
 }
  
-
-// if($_GET['getannual'])
-// {
-
-//     $sql = "SELECT 
-//             pa.ParkingAreaName,
-//             SUM(CASE WHEN ps.isAvailable = 'available' THEN 1 ELSE 0 END) AS available_spaces,
-//             SUM(CASE WHEN ps.isAvailable = 'unavailable' THEN 1 ELSE 0 END) AS unavailable_spaces
-//             FROM `parkingspace` ps
-//             JOIN `parkingarea` pa ON ps.ParkingAreaID = pa.ParkingAreaID
-//             GROUP BY pa.ParkingAreaName";
-//         $result = $mysqli->query($sql);
-//         $result = $result->fetch_all(MYSQLI_ASSOC);
- 
- 
-//     foreach($result as $row)
-//     {
-//         $totalavailspace[] = $row['available_spaces'];
-//         $totalunavailspace[] = $row['unavailable_spaces'];
-//     }
- 
-//     echo json_encode([
-//         "totalavailspace" => $totalavailspace,
-//         "totalunavailspace" => $totalunavailspace,
-//     ]);
-//     die;
-// }
  
 ?>
